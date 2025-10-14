@@ -1,0 +1,2 @@
+teste   resposta
+pergunta    resposta2
