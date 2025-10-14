@@ -1,2 +1,2 @@
-teste   resposta
-pergunta    resposta2
+teste:resposta
+pergunta:resposta2
