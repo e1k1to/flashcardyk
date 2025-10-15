@@ -72,12 +72,14 @@ public class Program
             Console.Clear();
             if (answer.ToLower() == cardback.ToLower())
             {
+                Console.WriteLine();
                 Console.WriteLine("Congratulations, you got it right!");
                 correctAnswers++;
                 Thread.Sleep(sleepTime);
             }
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("Unfortunately, you got it wrong!");
                 Console.WriteLine($"Correct answer: {cardback}");
                 Thread.Sleep(sleepTime);
