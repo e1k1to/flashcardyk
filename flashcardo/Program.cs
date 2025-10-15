@@ -8,7 +8,9 @@ namespace flashcardo;
 
 public class Program
 {
-    const string flashCardFilePath = "/home/yuki/Programaria/flashcard-yk/flashcardo/example.txt"; //what about flsc
+    private static string userHome = Environment.GetEnvironmentVariable("HOME");
+    private static string flashCardFileDir = String.Concat(userHome, "/.config/flashcardyk");
+    private static string flashCardFilePath = String.Concat(flashCardFileDir, "/card.txt"); //what about flsc
     public static List<Card> fullCardList = new List<Card>();
 
     static void Main(string[] args)
@@ -410,6 +412,16 @@ public class Program
     {
         List<Card> cardList = new List<Card>();
         string[] linhas;
+        
+        if(!Directory.Exists(flashCardFileDir)) 
+        {
+            Directory.CreateDirectory(flashCardFileDir);
+        }
+
+        if(!File.Exists(filePath)) 
+        {
+            File.WriteAllText(filePath, "");           
+        }
 
         try
         {
@@ -446,6 +458,11 @@ public class Program
     //
     public static bool saveToFile(List<Card> cardList, string filePath)
     {
+        if(!Directory.Exists(flashCardFileDir)) 
+        {
+            Directory.CreateDirectory(flashCardFileDir);
+        }
+
         if(cardList == null)
         {
             Console.WriteLine("Couldn't write file: ");
