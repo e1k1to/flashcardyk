@@ -47,7 +47,7 @@ public class Program
     {
         int totalCards = playlist.Count();
         int correctAnswers = 0;
-        int sleepTime = 10;
+        int sleepTime = 1000;
         List<Card> playCards = playlist;
         Shuffle(playCards);
 
@@ -91,7 +91,7 @@ public class Program
         Console.WriteLine();
         Console.WriteLine("><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><");
 
-        Thread.Sleep(sleepTime*300);
+        Thread.Sleep(sleepTime*3);
     }
 
     public static void Shuffle(List<Card> list)
