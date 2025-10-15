@@ -24,21 +24,89 @@ public class Program
             switch (menuChoice)
             {
                 case 1:
-                    showAllCards();
+                    play(fullCardList);
                     break;
                 case 2:
-                    addCard();
+                    showAllCards();
                     break;
                 case 3:
-                    deleteCard();
+                    addCard();
                     break;
                 case 4:
+                    deleteCard();
+                    break;
+                case 5:
                     Environment.Exit(0);
                     break;
             }
         }
     }
 
+
+    public static void play(List<Card> playlist)
+    {
+        int totalCards = playlist.Count();
+        int correctAnswers = 0;
+        int sleepTime = 10;
+        List<Card> playCards = playlist;
+        Shuffle(playCards);
+
+        foreach (var card in playCards)
+        {
+            string cardfront = card.TextFront;
+            string cardback = card.TextBack;
+            string answer = "";
+
+            Console.Clear();
+            Console.WriteLine("Word is: ");
+            Console.WriteLine(cardfront);
+            (int left, int top) = Console.GetCursorPosition();
+            Console.CursorVisible = true;
+            while (answer == null || answer == "")
+            {
+                Console.SetCursorPosition(left, top);
+                Console.WriteLine("Type your answer: ");
+                answer = Console.ReadLine();
+            }
+            Console.CursorVisible = false;
+            Console.Clear();
+            if (answer.ToLower() == cardback.ToLower())
+            {
+                Console.WriteLine("Congratulations, you got it right!");
+                correctAnswers++;
+                Thread.Sleep(sleepTime);
+            }
+            else
+            {
+                Console.WriteLine("Unfortunately, you got it wrong!");
+                Console.WriteLine($"Correct answer: {cardback}");
+                Thread.Sleep(sleepTime);
+            }
+
+        }
+        Console.Clear();
+        Console.WriteLine("><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><");
+        Console.WriteLine();
+        Console.WriteLine($"\t \tYou got {correctAnswers} out of {totalCards} right! Good job!");
+        Console.WriteLine();
+        Console.WriteLine("><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><");
+
+        Thread.Sleep(sleepTime*300);
+    }
+
+    public static void Shuffle(List<Card> list)
+    {
+        Random rand = new Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rand.Next(n + 1);
+            Card value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
     public static int mainMenu()
     {
         ConsoleKeyInfo key;
@@ -52,10 +120,12 @@ public class Program
             Console.ResetColor();
             (int left, int top) = Console.GetCursorPosition();
 
-            Console.WriteLine($"{(choice == 1 ? "> " : "  ")}Show all flashcards.");
-            Console.WriteLine($"{(choice == 2 ? "> " : "  ")}Create new flashcard");
-            Console.WriteLine($"{(choice == 3 ? "> " : "  ")}Delete existing flashcard");
-            Console.WriteLine($"{(choice == 4 ? "> " : "  ")}Exit");
+            Console.WriteLine($"{(choice == 1 ? "> " : "  ")}Play!");
+            Console.WriteLine($"{(choice == 2 ? "> " : "  ")}Show all flashcards.");
+            Console.WriteLine($"{(choice == 3 ? "> " : "  ")}Create new flashcard");
+            Console.WriteLine($"{(choice == 4 ? "> " : "  ")}Delete existing flashcard");
+            Console.WriteLine($"{(choice == 5 ? "> " : "  ")}Exit");
+            
 
             key = Console.ReadKey(false);
 
@@ -63,11 +133,11 @@ public class Program
             {
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.K:
-                    choice = choice == 1 ? 4 : choice - 1;
+                    choice = choice == 1 ? 5 : choice - 1;
                     break;
                 case ConsoleKey.DownArrow:
                 case ConsoleKey.J:
-                    choice = choice == 4 ? 1 : choice + 1;
+                    choice = choice == 5 ? 1 : choice + 1;
                     break;
                 case ConsoleKey.Enter:
                     enterPressed = true;
@@ -179,7 +249,7 @@ public class Program
         Card markedForDeletion = null;
 
         ConsoleKeyInfo key;
-        int choice = -2;
+        int choice = -1;
         bool enterPressed = false;
         while (!enterPressed)
         {
