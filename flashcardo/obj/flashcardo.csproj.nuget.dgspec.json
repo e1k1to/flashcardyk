@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/yuki/Programaria/flashcard-yk/flashcardo/flashcardo.csproj": {}
+    "/home/yuki/Programaria/flashcardyk/flashcardo/flashcardo.csproj": {}
   },
   "projects": {
-    "/home/yuki/Programaria/flashcard-yk/flashcardo/flashcardo.csproj": {
+    "/home/yuki/Programaria/flashcardyk/flashcardo/flashcardo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/yuki/Programaria/flashcard-yk/flashcardo/flashcardo.csproj",
+        "projectUniqueName": "/home/yuki/Programaria/flashcardyk/flashcardo/flashcardo.csproj",
         "projectName": "flashcardo",
-        "projectPath": "/home/yuki/Programaria/flashcard-yk/flashcardo/flashcardo.csproj",
+        "projectPath": "/home/yuki/Programaria/flashcardyk/flashcardo/flashcardo.csproj",
         "packagesPath": "/home/yuki/.nuget/packages/",
-        "outputPath": "/home/yuki/Programaria/flashcard-yk/flashcardo/obj/",
+        "outputPath": "/home/yuki/Programaria/flashcardyk/flashcardo/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/yuki/.nuget/NuGet/NuGet.Config"

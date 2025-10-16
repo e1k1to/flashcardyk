@@ -50,7 +50,7 @@ public class Program
         int totalCards = playlist.Count();
         int correctAnswers = 0;
         int sleepTime = 1000;
-        List<Card> playCards = playlist;
+        List<Card> playCards = new List<Card>(playlist);
         Shuffle(playCards);
 
         foreach (var card in playCards)
