@@ -26,7 +26,7 @@ public class Tests
             Assert.Fail();
         }
 
-        Assert.That(card.ToString(), Is.EqualTo("teste:testo"));
+        Assert.That(card.ToString(), Is.EqualTo("teste:testo:True"));
         //Assert.Equals(card.ToString(), "teste:testo");
     }
 
@@ -35,7 +35,7 @@ public class Tests
     {
         List<Card> cards = new List<Card>();
 
-        string[] resultados = { "teste:testo", "testa:testi" };
+        string[] resultados = { "teste:testo:True", "testa:testi:True" };
 
         cards = Program.readCardsFromFile("/home/yuki/Programaria/flashcard-yk/tests/teste2.txt");
 
@@ -49,16 +49,16 @@ public class Tests
         Assert.That(testes, Is.EquivalentTo(resultados));
         //Assert.Equals(card.ToString(), "teste:testo");
     }
-    
+
     [Test]
     public void TestWrite()
     {
         List<Card> cards = new List<Card>();
 
         cards.Add(new Card(textFront: "oi", textBack: "tchau"));
-        cards.Add(new Card(textFront:"boi", textBack:"bhau"));
+        cards.Add(new Card(textFront: "boi", textBack: "bhau"));
 
-        string[] resultados = { "oi:tchau", "boi:bhau" };
+        string[] resultados = { "oi:tchau:True", "boi:bhau:True" };
 
         Program.saveToFile(cards, "/home/yuki/Programaria/flashcard-yk/tests/teste3.txt");
 
@@ -72,5 +72,25 @@ public class Tests
         string[] testes = cards.Select(a => a.ToString()).ToArray();
 
         Assert.That(testes, Is.EquivalentTo(resultados));
+    }
+    
+    [Test]
+    public void TestReadPrint()
+    {
+        List<Card> cards = new List<Card>();
+
+        string[] resultados = { "teste:testo:True", "testa:testi:True" };
+
+        cards = Program.readCardsFromFile("/home/yuki/Programaria/flashcard-yk/tests/teste2.txt");
+
+        if (cards == null)
+        {
+            Assert.Fail();
+        }
+
+        string[] testes = cards.Select(a => a.ToString()).ToArray();
+
+        Assert.That(testes, Is.EquivalentTo(resultados));
+        //Assert.Equals(card.ToString(), "teste:testo");
     }
 }

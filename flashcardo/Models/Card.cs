@@ -6,7 +6,7 @@ public class Card
 {
     public static int lastId = 0;
     public int Id { get; }
-    public bool IsFlipped = false;
+    public bool IsActive = true;
     public string TextFront { get; set; }
     public string TextBack { get; set; }
 
@@ -27,13 +27,13 @@ public class Card
         lastId = 0;
     }
 
-    public void FlipCard()
+    public void SetCardCard()
     {
-        IsFlipped = !IsFlipped;
+        IsActive = !IsActive;
     }
 
     public override string ToString()
     {
-        return $"{TextFront}:{TextBack}";
+        return $"{TextFront}:{TextBack}:{IsActive}";
     }
 }
