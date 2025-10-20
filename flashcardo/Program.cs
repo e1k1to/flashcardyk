@@ -8,8 +8,8 @@ namespace flashcardo;
 
 public class Program
 {
-    private static string userHome = Environment.GetEnvironmentVariable("HOME");
-    private static string flashCardFileDir = String.Concat(userHome, "/.config/flashcardyk");
+    private static string userHome = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+    private static string flashCardFileDir = String.Concat(userHome, "/flashcardyk");
     private static string flashCardFilePath = String.Concat(flashCardFileDir, "/card.txt"); //what about flsc
     public static List<Card> fullCardList = new List<Card>();
 
@@ -38,6 +38,7 @@ public class Program
                     deleteCard();
                     break;
                 case 5:
+                    Console.CursorVisible = true;
                     Environment.Exit(0);
                     break;
             }
@@ -64,11 +65,11 @@ public class Program
             Console.WriteLine(cardfront);
             (int left, int top) = Console.GetCursorPosition();
             Console.CursorVisible = true;
-            while (answer == null || answer == "")
+            while (answer == "")
             {
                 Console.SetCursorPosition(left, top);
                 Console.WriteLine("Type your answer: ");
-                answer = Console.ReadLine();
+                answer = Console.ReadLine() ?? "";
             }
             Console.CursorVisible = false;
             Console.Clear();
@@ -197,12 +198,12 @@ public class Program
         string fronttxt = "";
         Console.CursorVisible = true;
         string backtxt = "";
-        while (fronttxt == "" || fronttxt == null)
+        while (fronttxt == "")
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Write the text for the front side of the card: (write \\CANCEL to cancel)");
-            fronttxt = Console.ReadLine();
+            fronttxt = Console.ReadLine() ?? "";
             if (fronttxt == "\\CANCEL")
             {
                 Console.CursorVisible = false;
@@ -216,12 +217,12 @@ public class Program
                 fronttxt = "";
             }
         }
-        while (backtxt == "" || backtxt == null)
+        while (backtxt == "")
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Write the text for the back side of the card: (write \\CANCEL to cancel)");
-            backtxt = Console.ReadLine();
+            backtxt = Console.ReadLine() ?? "";
             if (backtxt == "\\CANCEL")
             {
                 Console.CursorVisible = false;
@@ -384,7 +385,7 @@ public class Program
             Console.WriteLine("Are you sure you want to delete this card?: ");
             Console.WriteLine($"ID: {markedForDeletion.Id}, Front: {markedForDeletion.TextFront}, Back: {markedForDeletion.TextBack}");
             Console.CursorVisible = true;
-            confirm = Console.ReadLine();
+            confirm = Console.ReadLine() ?? "";
             Console.CursorVisible = false;
             if (confirm.ToLower() == "n")
             {
